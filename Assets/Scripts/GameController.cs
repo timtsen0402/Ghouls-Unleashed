@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using static PlayerHealth;
+using static GameConstants;
 
 public class GameController : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class GameController : MonoBehaviour
     public static Text percentageAttackTxt;
     public static Text percentageHealthTxt;
 
-    public static Vector3 playerOringinalPos = new(710f, 15f, 650f);
+
 
     public static int killed = 0;
     public static int money = 0;
@@ -54,7 +55,7 @@ public class GameController : MonoBehaviour
     {
         timer = 0f;
         killed = 0;
-        money = 2000;
+        money = INITIAL_MONEY;
         panel.SetActive(false);
         shop.SetActive(false);
         victory.SetActive(false);
@@ -138,8 +139,8 @@ public class GameController : MonoBehaviour
     }
     void PlayerPosLimit()
     {
-        if (player.transform.position.x < 630 || player.transform.position.x > 780 ||
-            player.transform.position.z < 510 || player.transform.position.z > 790)
+        if (player.transform.position.x < BOUNDARY_MIN_X || player.transform.position.x > BOUNDARY_MAX_X ||
+            player.transform.position.z < BOUNDARY_MIN_Z || player.transform.position.z > BOUNDARY_MAX_Z)
         {
             RenderSettings.skybox = redSky;
             //請回去戰鬥區域

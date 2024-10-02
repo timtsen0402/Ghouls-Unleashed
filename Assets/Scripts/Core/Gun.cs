@@ -7,43 +7,43 @@ using UnityEngine.UI;
 using static GameController;
 using static TradeSystem;
 
-public class Gun : MonoBehaviour
+public abstract class Gun : MonoBehaviour
 {
     [Header("Gun Performance")]
-    public string gunSound;
-    public float damage;
-    public int totalAmmo;
-    public int maxAmmo;
-    public float shootRate;
-    public float reloadTime = 3f;
+    [SerializeField] protected string gunSound;
+    [SerializeField] protected float damage;
+    [SerializeField] public int totalAmmo { private set; get; }
+    [SerializeField] public int maxAmmo { private set; get; }
+    [SerializeField] protected float shootRate;
+    [SerializeField] protected float reloadTime = 3f;
 
     [Header("Gun Effect")]
+    [SerializeField] protected ParticleSystem flash;
+    [SerializeField] protected GameObject impactHole;
+    [SerializeField] protected GameObject impactBlood;
+    [SerializeField] protected GameObject impactBloodHeavy;
 
-    public ParticleSystem flash;
-    public GameObject impactHole;
-    public GameObject impactBlood;
-    public GameObject impactBloodHeavy;
     Animator animator;
 
 
-    public int originalTotalAmmo;
-    int currentAmmo;
-    float shootRateTimeStamp;
-    bool isReloading = false;
+    protected int originalTotalAmmo;
+    protected int currentAmmo;
+    protected float shootRateTimeStamp;
+    protected bool isReloading = false;
 
-    void Start()
+    protected virtual void Start()
     {
         animator = GameObject.Find("WeaponHolder").GetComponent<Animator>();
 
         currentAmmo = maxAmmo;
         originalTotalAmmo = totalAmmo;
     }
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         isReloading = false;
         animator.SetBool("isReloading", false);
     }
-    void Update()
+    protected virtual void Update()
     {
         ammoTxt.text = currentAmmo.ToString() + " / " + totalAmmo.ToString();
 
@@ -66,7 +66,7 @@ public class Gun : MonoBehaviour
         Debug.DrawRay(fpsCamera.transform.position, fpsCamera.transform.forward * 100f, Color.green);
     }
 
-    void Shoot()
+    protected virtual void Shoot()
     {
         // 可射擊頻率
         if (Time.time > shootRateTimeStamp)
@@ -88,20 +88,20 @@ public class Gun : MonoBehaviour
                     ZombieGrenade zombieGrenade = hit.transform.gameObject.GetComponent<ZombieGrenade>();
                     zombieGrenade.Ignite();
                 }
-                Target target = hit.transform.gameObject.GetComponentInParent<Target>();
+                Zombie zombie = hit.transform.gameObject.GetComponentInParent<Zombie>();
 
-                if (target != null && target.tag == "Zombie")
+                if (zombie != null && zombie.tag == "Zombie")
                 {
                     //爆頭傷害
                     if (hit.transform.name == "Z_Head")
                     {
-                        target.TakeDamage(damage * attackCoefficient * 2);
+                        zombie.TakeDamage(damage * attackCoefficient * 2);
                         Instantiate(impactBloodHeavy, hit.point, Quaternion.LookRotation(hit.normal));
                     }
                     //一般傷害
                     else
                     {
-                        target.TakeDamage(damage * attackCoefficient);
+                        zombie.TakeDamage(damage * attackCoefficient);
                         Instantiate(impactBlood, hit.point, Quaternion.LookRotation(hit.normal));
                     }
                 }
@@ -114,7 +114,7 @@ public class Gun : MonoBehaviour
             }
         }
     }
-    IEnumerator Reload()
+    protected virtual IEnumerator Reload()
     {
         isReloading = true;
         animator.SetBool("isReloading", true);

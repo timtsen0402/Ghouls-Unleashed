@@ -51,11 +51,7 @@ public class TradeSystem : MonoBehaviour
         {
             player.GetComponentInChildren<Gun>().totalAmmo = player.GetComponentInChildren<Gun>().originalTotalAmmo;
         }
-        else if (player.GetComponentInChildren<Sniper>() != null && player.GetComponentInChildren<Sniper>().totalAmmo < player.GetComponentInChildren<Sniper>().originalTotalAmmo && money >= price)
-        {
-            player.GetComponentInChildren<Sniper>().totalAmmo = player.GetComponentInChildren<Sniper>().originalTotalAmmo;
 
-        }
         FindObjectOfType<AudioManager>().Play("refill");
         money -= price;
 

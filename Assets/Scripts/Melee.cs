@@ -29,39 +29,39 @@ public class Melee : MonoBehaviour
     }
     void Hit()
     {
-        if (Time.time > hitRateTimeStamp)
+        if (Time.time <= hitRateTimeStamp) return;
+
+        animator.Play(attackAnimatorName);
+        hitRateTimeStamp = Time.time + hitRate;
+
+        Vector3 forwardDirection = fpsCam.transform.forward;
+
+        float halfAngle = attackAngle / 2f;
+
+        Collider[] hitColliders = Physics.OverlapSphere(fpsCam.transform.position, attackRange);
+
+        foreach (Collider hitCollider in hitColliders)
         {
-            animator.Play(attackAnimatorName);
-            hitRateTimeStamp = Time.time + hitRate;
+            Vector3 targetDirection = hitCollider.transform.position - fpsCam.transform.position;
+            float angle = Vector3.Angle(forwardDirection, targetDirection);
 
-            Vector3 forwardDirection = fpsCam.transform.forward;
-
-            float halfAngle = attackAngle / 2f;
-
-            Collider[] hitColliders = Physics.OverlapSphere(fpsCam.transform.position, attackRange);
-
-            foreach (Collider hitCollider in hitColliders)
+            if (angle <= halfAngle)
             {
-                Vector3 targetDirection = hitCollider.transform.position - fpsCam.transform.position;
-                float angle = Vector3.Angle(forwardDirection, targetDirection);
-
-                if (angle <= halfAngle)
+                Zombie zombie = hitCollider.transform.gameObject.GetComponentInParent<Zombie>();
+                if (zombie != null && zombie.CompareTag("Zombie"))
                 {
-                    Target target = hitCollider.transform.gameObject.GetComponentInParent<Target>();
-                    if (target != null && target.CompareTag("Zombie"))
-                    {
-                        target.TakeDamage(damage);
-                        FindObjectOfType<AudioManager>().Play(hitAudioName);
-                        if (gameObject.name != "Bat")
-                            Instantiate(impactBlood, new(target.transform.position.x, target.transform.position.y + 5f, target.transform.position.z), Quaternion.identity);
-                    }
-                    else
-                    {
-                        FindObjectOfType<AudioManager>().Play("swing");
-                    }
+                    zombie.TakeDamage(damage);
+                    FindObjectOfType<AudioManager>().Play(hitAudioName);
+                    if (gameObject.name != "Bat")
+                        Instantiate(impactBlood, new(zombie.transform.position.x, zombie.transform.position.y + 5f, zombie.transform.position.z), Quaternion.identity);
+                }
+                else
+                {
+                    FindObjectOfType<AudioManager>().Play("swing");
                 }
             }
         }
+
     }
 
     void OnDrawGizmosSelected()

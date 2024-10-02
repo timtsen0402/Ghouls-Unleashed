@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 using static GameController;
+using static GameConstants;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public static float maxHealth;
     public static float currentHealth;
     public Text txt;
     public LevelLoader levelLoader;
@@ -18,8 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        maxHealth = 100f;
-        currentHealth = maxHealth;
+        currentHealth = PLAYER_START_HEALTH;
         PPV = fpsCamera.GetComponent<PostProcessVolume>();
         PPV.enabled = false;
     }

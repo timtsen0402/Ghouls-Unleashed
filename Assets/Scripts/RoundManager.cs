@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static GameController;
 using static PlayerHealth;
+using static GameConstants;
 
 public class RoundManager : MonoBehaviour
 {
@@ -16,31 +17,10 @@ public class RoundManager : MonoBehaviour
     [Header("Level Setting")]
     public int level;
     public int winLevel;
-    [Header("Time Setting")]
-    public float startTime;
-    public float readyTime;
-    public float battleTime;
-    public float bufferTime;
 
     float currentTime;
     int timeConditionCount;
 
-    Vector3 spawnPos5 = new(780, 20, 505);
-    Vector3 spawnPos6 = new(685, 40, 420);
-    Vector3 spawnPos7 = new(560, 5, 450);
-    Vector3 spawnPos8 = new(840, 40, 515);
-    Vector3 spawnPos9 = new(1000, 25, 555);
-    Vector3 spawnPos10 = new(640, 45, 745);
-
-    Vector3 spawnPos11 = new(750, 4, 870);
-    Vector3 spawnPos12 = new(740, 3, 470);
-
-    Vector3 spawnPos13 = new(800, 3, 700);
-    Vector3 spawnPos14 = new(800, 3, 600);
-    Vector3 spawnPos15 = new(600, 3, 650);
-
-
-    Vector3 center = new(760, 15, 650);
     // s time(start)
     bool s = true;
     // a time(ready)
@@ -49,7 +29,6 @@ public class RoundManager : MonoBehaviour
     bool b = true;
     // c time(buffer)
     bool c = true;
-
 
 
     void Start()
@@ -68,7 +47,7 @@ public class RoundManager : MonoBehaviour
             if (s)
             {
                 s = false;
-                currentTime = startTime;
+                currentTime = START_TIME;
             }
             CountdownTimer();
             if (currentTime <= 1f)
@@ -83,9 +62,9 @@ public class RoundManager : MonoBehaviour
             if (a)
             {
                 a = false;
-                currentTime = readyTime;
-                player.transform.position = playerOringinalPos;
-                currentHealth = maxHealth;
+                currentTime = READY_TIME;
+                player.transform.position = PLAYER_SPAWN_POS;
+                currentHealth = PLAYER_START_HEALTH;
                 shop.SetActive(true);
                 player.GetComponent<PlayerMovement>().enabled = false;
                 FindObjectOfType<AudioManager>().Play("readyBGM");
@@ -103,7 +82,7 @@ public class RoundManager : MonoBehaviour
             if (b)
             {
                 b = false;
-                currentTime = battleTime;
+                currentTime = BATTLE_TIME;
                 shop.SetActive(false);
                 timeTempZ_Normal = 0f;
                 timeTempZ_Evolved = 0f;
@@ -138,7 +117,7 @@ public class RoundManager : MonoBehaviour
                     FindObjectOfType<AudioManager>().Stop("specialBGM");
                 else
                     FindObjectOfType<AudioManager>().Stop("normalBGM");
-                currentTime = bufferTime;
+                currentTime = BUFFER_TIME;
             }
             CountdownTimer();
             if (currentTime <= 1f)
@@ -186,11 +165,11 @@ public class RoundManager : MonoBehaviour
             case 1:
                 if (timer > timeTempZ_Normal)
                 {
-                    NavMeshAgent.Instantiate(z_normal, spawnPos5, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos6, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos7, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos8, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos10, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_2, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_3, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_4, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_5, Quaternion.identity);
                     timeTempZ_Normal = timer + 10;
                 }
                 break;
@@ -198,74 +177,71 @@ public class RoundManager : MonoBehaviour
             case 2:
                 if (timer > timeTempZ_Normal)
                 {
-                    NavMeshAgent.Instantiate(z_normal, spawnPos5, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos6, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos7, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos8, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos10, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_2, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_3, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_4, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_5, Quaternion.identity);
                     timeTempZ_Normal = timer + 7;
                 }
-                //多普疆
                 break;
             // normal + evolved zombie
             case 3:
                 if (timer > timeTempZ_Normal)
                 {
-                    NavMeshAgent.Instantiate(z_normal, spawnPos5, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos6, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos7, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos8, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos10, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_2, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_3, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_4, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_5, Quaternion.identity);
                     timeTempZ_Normal = timer + 10;
                 }
                 if (timer > timeTempZ_Evolved)
                 {
-                    NavMeshAgent.Instantiate(z_evolved, spawnPos11, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_evolved, spawnPos12, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_evolved, EVOLVED_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_evolved, EVOLVED_SPAWN_POS_2, Quaternion.identity);
                     timeTempZ_Evolved = timer + 15;
                 }
-                //普疆+一點快將
                 break;
             // normal + evolved + grenade zombie
             case 4:
                 if (timer > timeTempZ_Normal)
                 {
-                    NavMeshAgent.Instantiate(z_normal, spawnPos5, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos6, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos7, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos8, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_normal, spawnPos10, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_2, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_3, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_4, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_normal, NORMAL_SPAWN_POS_5, Quaternion.identity);
                     timeTempZ_Normal = timer + 7;
                 }
                 if (timer > timeTempZ_Evolved)
                 {
-                    NavMeshAgent.Instantiate(z_evolved, spawnPos11, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_evolved, spawnPos12, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_evolved, EVOLVED_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_evolved, EVOLVED_SPAWN_POS_2, Quaternion.identity);
                     timeTempZ_Evolved = timer + 20;
                 }
                 if (timer > timeTempZ_Grenade)
                 {
-                    NavMeshAgent.Instantiate(z_grenade, spawnPos13, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_grenade, spawnPos14, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_grenade, spawnPos15, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_grenade, BOMB_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_grenade, BOMB_SPAWN_POS_2, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_grenade, BOMB_SPAWN_POS_3, Quaternion.identity);
                     timeTempZ_Grenade = Mathf.Infinity;
                 }
-                //普+快+手劉
                 break;
             // headless + grenade zombie 
             case 5:
                 if (timer > timeTempZ_Undying)
                 {
-                    NavMeshAgent.Instantiate(z_undying, spawnPos5, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_undying, spawnPos11, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_undying, spawnPos12, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_undying, NORMAL_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_undying, EVOLVED_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_undying, EVOLVED_SPAWN_POS_2, Quaternion.identity);
                     timeTempZ_Undying = Mathf.Infinity;
                 }
                 if (timer > timeTempZ_Grenade)
                 {
-                    NavMeshAgent.Instantiate(z_grenade, spawnPos13, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_grenade, spawnPos14, Quaternion.identity);
-                    NavMeshAgent.Instantiate(z_grenade, spawnPos15, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_grenade, BOMB_SPAWN_POS_1, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_grenade, BOMB_SPAWN_POS_2, Quaternion.identity);
+                    NavMeshAgent.Instantiate(z_grenade, BOMB_SPAWN_POS_3, Quaternion.identity);
                     timeTempZ_Grenade = Mathf.Infinity;
                 }
                 break;

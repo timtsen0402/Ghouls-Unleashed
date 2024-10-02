@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 496860146568537100, guid: 76114a16673c2904cb2cb7053a3ddc10, type: 3}
@@ -148,45 +149,27 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7617103563624255186, guid: 76114a16673c2904cb2cb7053a3ddc10, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8993562719025470778}
+    - targetCorrespondingSourceObject: {fileID: 7617103563624255186, guid: 76114a16673c2904cb2cb7053a3ddc10, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5620303799893052601}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76114a16673c2904cb2cb7053a3ddc10, type: 3}
 --- !u!4 &1546187949114302009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7617103563624255186, guid: 76114a16673c2904cb2cb7053a3ddc10, type: 3}
   m_PrefabInstance: {fileID: 8989267225548230891}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2179453133925827715 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7133336745682130024, guid: 76114a16673c2904cb2cb7053a3ddc10, type: 3}
-  m_PrefabInstance: {fileID: 8989267225548230891}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1363599638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2179453133925827715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee1c3757538a4564aaff37a4b32ddb7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunSound: pistolShot
-  damage: 40
-  totalAmmo: 72
-  maxAmmo: 12
-  shootRate: 0.4
-  reloadTime: 3
-  flash: {fileID: 9079332977888409432}
-  impactHole: {fileID: 100002, guid: 2f9348d6583cde14eb0d82bb9732647e, type: 3}
-  impactBlood: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
-  impactBloodHeavy: {fileID: 3548588485384254792, guid: 0b2fae281ba158c4dbe5992649b816db, type: 3}
-  originalTotalAmmo: 0
 --- !u!1001 &8989267226291953804
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1546187949114302009}
     m_Modifications:
     - target: {fileID: 1220994428806852, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
@@ -342,10 +325,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 7a306caa8f9f7ed40a5361ce411cdf1b, type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
---- !u!198 &9079332977888409432 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+--- !u!4 &8993562719025470778 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4441266138185142, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
   m_PrefabInstance: {fileID: 8989267226291953804}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8989267226711947772
@@ -353,6 +339,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1546187949114302009}
     m_Modifications:
     - target: {fileID: 3548588485384254789, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
@@ -412,4 +399,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
+--- !u!4 &5620303799893052601 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3548588485384254789, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
+  m_PrefabInstance: {fileID: 8989267226711947772}
+  m_PrefabAsset: {fileID: 0}
